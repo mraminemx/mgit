@@ -1,0 +1,23 @@
+<ion-view title="Search">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <h1>GitHub Repos</h1>
+
+    <ion-list>
+      <ion-item ng-repeat="repo in repos" href="#/repo/{{repo.id}}">
+        
+            <i class="icon ion-cube"></i>
+            {{repo.name}}
+            <span class="badge badge-assertive">{{repo.stargazers_count}}</span>
+        
+
+      </ion-item>
+    </ion-list>
+
+    <h3 ng-repeat="repo in repos">
+      {{repo.name}}
+    </h3>
+  </ion-content>
+</ion-view>

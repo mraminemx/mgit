@@ -44,7 +44,9 @@ angular.module('starter.controllers', [])
   ];
 })
 
-.controller('GitCtrl', function($scope, $http, $ionicLoading, $timeout) {
+.controller('GitCtrl', function($scope, $http, $stateParams, $ionicLoading, $timeout) {
+
+  var org = $stateParams.org;
 
   $scope.show = function() {
     $ionicLoading.show({
@@ -58,7 +60,7 @@ angular.module('starter.controllers', [])
 
   $scope.show();
 
-  var gitUrl = 'https://api.github.com/orgs/netflix/repos';
+  var gitUrl = 'https://api.github.com/orgs/' + org + '/repos';
 
   $timeout(function() {
     // Do something with a delay here
@@ -71,9 +73,38 @@ angular.module('starter.controllers', [])
 
       })
     }, 1000);
+  })
 
- 
-  
+ .controller('RepoCtrl', function($scope, $http, $stateParams, $ionicLoading, $timeout) {
+
+  var org = $stateParams.org;
+  var repo = $stateParams.repo;
+
+  $scope.show = function() {
+    $ionicLoading.show({
+      templateUrl: 'templates/loading.html'
+    });
+  };
+
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+
+  $scope.show();
+
+  var repoUrl = 'https://api.github.com/repos/' + org + '/' + repo;
+
+  $timeout(function() {
+    // Do something with a delay here
+    $http.get(repoUrl).
+      success(function(data, status, headers, config) {
+        $scope.repo = data;
+        $scope.hide();
+      }).
+      error(function(data, status, headers, config) {
+
+      })
+    }, 1000);
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {

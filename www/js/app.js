@@ -26,18 +26,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives']
     .state('app', {
       url: "/app",
       abstract: true,
-      templateUrl: "templates/menu.html",
-      controller: 'AppCtrl'
+      templateUrl: "templates/browse.html",
+      controller: 'BrowseCtrl'
     })
 
-    .state('app.search', {
-      url: "/search",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/search.html"
-        }
-      }
-    })
+    
 
     .state('app.git', {
       url: "/git/:org",
@@ -61,12 +54,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives']
 
     .state('app.browse', {
       url: "/browse",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/browse.html"
-        }
-      }
+      templateUrl: "templates/browse.html",
+      controller: 'BrowseCtrl'
     })
+
     .state('app.playlists', {
       url: "/playlists",
       views: {
@@ -87,6 +78,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.directives']
       }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/browse');
 });
 

@@ -107,5 +107,15 @@ angular.module('starter.controllers', [])
     }, 1000);
 })
 
+.controller('BrowseCtrl', function($scope, $stateParams) {
+
+  $scope.org = 'Google';
+
+  $scope.findOrg = function () {
+    console.log("Org: " + $scope.org);
+  }
+  
+})
+
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });

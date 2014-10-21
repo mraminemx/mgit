@@ -25,6 +25,90 @@
   </head>
 
   <body ng-app="starter">
-    <ion-nav-view></ion-nav-view>
+
+    <ion-nav-bar animation="nav-title-slide-ios7" 
+                 type="bar-positive" 
+                 back-button-type="button-icon" 
+                 back-button-icon="ion-arrow-left-c"></ion-nav-bar>
+             
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+
+    <script id="tabs.html" type="text/ng-template">
+        <ion-tabs class="tabs-positive tabs-icon-only">
+          <ion-tab title="Home" icon-on="ion-cube" icon-off="ion-cube">
+            <ion-nav-view name="home-tab" animation="slide-left-right"></ion-nav-view>
+          </ion-tab>
+          <ion-tab title="Org" icon-on="ion-code" icon-off="ion-code">
+            <ion-nav-view name="org-tab" animation="slide-left-right"></ion-nav-view>
+          </ion-tab>
+          <ion-tab title="Repo" icon-on="ion-fork-repo" icon-off="ion-fork-repo">
+            <ion-nav-view name="repo-tab" animation="slide-left-right"></ion-nav-view>
+          </ion-tab>
+        </ion-tabs>
+    </script>
+
+    <!-- Main search form -->
+    <script id="main.html" type="text/ng-template">
+        <ion-view title="Select GitHub Org">
+          <ion-content class="has-header">
+            <form name="searchform">
+                <label class="item item-input">
+                  <input type="text" ng-model="org" placeholder="Enter org name">
+                </label>
+                <center><button ng-click="findOrg(org)" class="button icon-left ion-search button-block button-positive">Find</button></center>
+            </form>
+          </ion-content>
+        </ion-view>
+    </script>
+
+    <!-- List the repos for a given organization -->
+    <script id="org.html" type="text/ng-template">
+        <ion-view title="Org: {{org}}">
+      
+          <ion-content class="has-header">
+            <h1>GitHub Repos</h1>
+
+            <ion-list>
+                <label class="item item-input">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input ng-model="query" type="text" placeholder="Filter results">
+                </label>
+                <ion-item ng-repeat="repo in repos | orderBy:'stargazers_count':'reverse' | filter: query" href="#/tab/home/{{repo.full_name}}">
+                    <i class="icon ion-cube"></i>
+                    {{repo.name}}
+                    <span class="badge badge-assertive">{{repo.stargazers_count}}</span>
+              </ion-item>
+            </ion-list>
+
+          </ion-content>
+        </ion-view>
+    </script>
+
+    <!-- Repo details -->
+    <script id="repo.html" type="text/ng-template">
+        <ion-view title="GitHub Repo: {{repo.name}}" drag-back>
+         <ion-content class="has-header">
+            <h2>GitHub Repo: {{repo.name}}</h2>
+            <h3>Description</h3>
+            <p>{{repo.description}}</p>
+            <h3>Number of forks: <strong style="color:red">{{repo.forks_count}}</strong></h3>
+            <h3>Number of watchers: <strong style="color:red">{{repo.watchers_count}}</strong></h3>
+            <h3>Language: <strong style="color:red">{{repo.language}}</strong></h3>
+          </ion-content>
+        </ion-view>
+    </script>
+
+    <!-- Loading indicator -->
+    <script id="loading.html" type="text/ng-template">
+        <div class="rotate"></div>
+            <br>
+                Loading...
+    </script>
+
+
+
+
+
   </body>
 </html>

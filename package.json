@@ -1,7 +1,7 @@
 {
-  "name": "stockapp",
+  "name": "mgit",
   "version": "1.0.0",
-  "description": "StockApp: An Ionic project",
+  "description": "MGit: An Ionic project",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
